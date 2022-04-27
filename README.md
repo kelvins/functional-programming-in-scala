@@ -4,6 +4,16 @@ Simple but useful tutorials to learn functional programming with Scala examples.
 
 ## Topics
 
+- [Pure Functions](#pure-functions)
+- [Immutability](#immutability)
+- [Higher-order Functions](#higher-order-functions)
+- [Closures](#closures)
+- [Functional Composition](#functional-composition)
+- [Currying](#currying)
+- [Map](#map)
+- [Filter](#filter)
+- [Reduce](#reduce)
+- [Referential Transparency](#referential-transparency)
 - [References](#references)
 
 ## Pure Functions
