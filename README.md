@@ -23,7 +23,7 @@ Although the examples are written in Scala, the concepts presented here are gene
 
 ## Pure Functions
 
-According to [Wikipedia](https://en.wikipedia.org/wiki/Pure_function), pure functions are functions that has the following properties:
+According to [Wikipedia](https://en.wikipedia.org/wiki/Pure_function), pure functions are functions that have the following properties:
 
 - The function **return value will always be the same** for the same input arguments;
 - The function **has no side effects**.
