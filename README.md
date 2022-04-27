@@ -1,6 +1,7 @@
 # <img height=25 src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/scala/scala-original.svg" /> Functional Programming in Scala
 
-Simple but useful tutorials to learn functional programming with Scala examples.
+This repository aims to present simple but useful content related to the core concepts of functional programming with examples in Scala.
+Although the examples are written in Scala, the concepts presented here are general to the functional programming paradigm and can be easily applied to other languages.
 
 ## Topics
 
