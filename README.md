@@ -4,6 +4,7 @@ Simple but useful tutorials to learn functional programming with Scala examples.
 
 ## Topics
 
+- [Introduction](#introduction)
 - [Pure Functions](#pure-functions)
 - [Immutability](#immutability)
 - [Higher-order Functions](#higher-order-functions)
@@ -14,9 +15,46 @@ Simple but useful tutorials to learn functional programming with Scala examples.
 - [Filter](#filter)
 - [Reduce](#reduce)
 - [Referential Transparency](#referential-transparency)
+- [Tail Recursion](#tail-recursion)
 - [References](#references)
 
+## Introduction
+
 ## Pure Functions
+
+According to [Wikipedia](https://en.wikipedia.org/wiki/Pure_function), pure functions are functions that has the following properties:
+
+- The function **return value will always be the same** for the same input arguments;
+- The function **has no side effects**.
+
+Thus a pure function is a computational analogue of a mathematical function.
+
+Pure Functions:
+
+```scala
+def sum(x: Int, y: Int): Int = x + y
+```
+
+Impure Functions:
+
+Side effect:
+
+```scala
+var y: Int = 5
+
+def sum(x: Int): Int = {
+  x + y
+}
+```
+
+Random value:
+
+```scala
+def sum(x: Int, y: Int): Int = {
+  val rand: Int = scala.util.Random.nextInt(100)
+  x + y + rand
+}
+```
 
 ## Immutability
 
@@ -35,6 +73,8 @@ Simple but useful tutorials to learn functional programming with Scala examples.
 ## Reduce
 
 ## Referential Transparency
+
+## Tail Recursion
 
 ## References
 
