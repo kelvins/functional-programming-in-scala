@@ -1,4 +1,4 @@
-# Functional Programming in Scala
+# <img height=25 src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/scala/scala-original.svg" /> Functional Programming in Scala
 
 Simple but useful tutorials to learn functional programming with Scala examples.
 
