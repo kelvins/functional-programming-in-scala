@@ -21,6 +21,9 @@ Although the examples are written in Scala, the concepts presented here are gene
 
 ## Introduction
 
+Like many modern programming languages, Scala is a multi-paradigm language which supports concurrent, functional, imperative and object-oriented paradigms.
+Despite that, in these examples we're going to focus only in the functional paradigm.
+
 ## Pure Functions
 
 According to [Wikipedia](https://en.wikipedia.org/wiki/Pure_function), pure functions are functions that have the following properties:
