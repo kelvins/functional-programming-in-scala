@@ -17,6 +17,7 @@ Although the examples are written in Scala, the concepts presented here are gene
 - [Reduce](#reduce)
 - [Referential Transparency](#referential-transparency)
 - [Tail Recursion](#tail-recursion)
+- [Enumerations](#enumeraions)
 - [References](#references)
 
 ## Introduction
@@ -207,6 +208,8 @@ val data: List[Int] = List(1, 2, 3, 4, 5)
 scala> sum(data)
 val res0: Int = 15
 ```
+
+## Enumerations
 
 ## References
 
