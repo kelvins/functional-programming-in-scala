@@ -39,6 +39,14 @@ Pure Functions:
 def sum(x: Int, y: Int): Int = x + y
 ```
 
+```scala
+scala> sum(10, 5)
+val res0: Int = 15
+
+scala> sum(10, 5)
+val res1: Int = 15
+```
+
 Impure Functions:
 
 Side effect:
@@ -51,6 +59,17 @@ def sum(x: Int): Int = {
 }
 ```
 
+```scala
+scala> sum(5)
+val res0: Int = 10
+
+scala> y = 10
+y: Int = 10
+
+scala> sum(5)
+val res1: Int = 15
+```
+
 Random value:
 
 ```scala
@@ -58,6 +77,14 @@ def sum(x: Int, y: Int): Int = {
   val rand: Int = scala.util.Random.nextInt(100)
   x + y + rand
 }
+```
+
+```scala
+scala> sum(10, 5)
+val res0: Int = 73
+
+scala> sum(10, 5)
+val res1: Int = 110
 ```
 
 ## Immutability
@@ -69,6 +96,18 @@ def sum(x: Int, y: Int): Int = {
 ## Functional Composition
 
 ## Currying
+
+> Currying is the technique of converting a function that takes multiple arguments into a sequence of functions that each takes a single argument
+
+```scala
+def add(x: Int)(y: Int): Int = x + y
+```
+
+```scala
+scala> val add10 = add(10)
+scala> add10(5)
+val res0: Int = 15
+```
 
 ## Map
 
