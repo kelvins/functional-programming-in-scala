@@ -6,6 +6,7 @@ Although the examples are written in Scala, the concepts presented here are gene
 ## Topics
 
 - [Introduction](#introduction)
+- [Substitution Model](#substitution-model)
 - [Pure Functions](#pure-functions)
 - [Immutability](#immutability)
 - [Higher-order Functions](#higher-order-functions)
@@ -24,6 +25,8 @@ Although the examples are written in Scala, the concepts presented here are gene
 
 Like many modern programming languages, Scala is a multi-paradigm language which supports concurrent, functional, imperative and object-oriented paradigms.
 Despite that, in these examples we're going to focus only in the functional paradigm.
+
+## Substitution Model
 
 ## Pure Functions
 
