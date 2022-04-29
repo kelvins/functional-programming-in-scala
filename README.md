@@ -89,6 +89,34 @@ val res1: Int = 110
 
 ## Immutability
 
+Mutable
+
+```scala
+scala> var y: Int = 10
+var y: Int = 10
+
+scala> y = 5
+y: Int = 5
+```
+
+Immutable
+
+```scala
+scala> val x: Int = 10
+val x: Int = 10
+
+scala> x = 5
+-- [E052] Type Error: ----------------------------------------------------------
+1 |x = 5
+  |^^^^^
+  |Reassignment to val x
+
+longer explanation available when compiling with `-explain`
+1 error found
+```
+
+It is recommended to use `val` whenever possible.
+
 ## Higher-order Functions
 
 ## Closures
@@ -111,13 +139,74 @@ val res0: Int = 15
 
 ## Map
 
+```scala
+scala> val data: List[Int] = List(1, 2, 3, 4, 5)
+val data: List[Int] = List(1, 2, 3, 4, 5)
+
+scala> data.map(_ * 2)
+val res0: List[Int] = List(2, 4, 6, 8, 10)
+```
+
+Combining currying with map:
+
+```scala
+scala> val data: List[Int] = List(1, 2, 3, 4, 5)
+val data: List[Int] = List(1, 2, 3, 4, 5)
+
+scala> def add(x: Int)(y: Int): Int = x + y
+def add(x: Int)(y: Int): Int
+
+scala> data.map(add(1))
+val res0: List[Int] = List(2, 3, 4, 5, 6)
+```
+
 ## Filter
 
+```scala
+scala> val data: List[Int] = List(1, 2, 3, 4, 5)
+val data: List[Int] = List(1, 2, 3, 4, 5)
+
+scala> data.filter(_ > 3)
+val res0: List[Int] = List(4, 5)
+```
+
 ## Reduce
+
+```scala
+scala> val data: List[Int] = List(1, 2, 3, 4, 5)
+val data: List[Int] = List(1, 2, 3, 4, 5)
+
+scala> data.reduce(_ + _)
+val res15: Int = 15
+```
+
+Combining map, filter and reduce:
+
+```scala
+scala> val data: List[Int] = List(1, 2, 3, 4, 5)
+val data: List[Int] = List(1, 2, 3, 4, 5)
+
+scala> data.map(_ * 2).filter(_ > 5).reduce(_ + _)
+val res18: Int = 24
+```
 
 ## Referential Transparency
 
 ## Tail Recursion
+
+```scala
+def sum(data: List[Int]): Int = {
+  if data.isEmpty then 0 else data.head + sum(data.tail)
+}
+```
+
+```scala
+scala> val data: List[Int] = List(1, 2, 3, 4, 5)
+val data: List[Int] = List(1, 2, 3, 4, 5)
+
+scala> sum(data)
+val res0: Int = 15
+```
 
 ## References
 
