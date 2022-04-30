@@ -31,6 +31,7 @@ If you have any doubts or suggestions about the content, feel free to contribute
 - [Try, Success, Failure](#try-success-failure)
 - [Companion Objects](#companion-objects)
 - [Case Classes](#case-classes)
+- [Short-circuit Evaluation](#short-circuit-evaluation)
 - [References](#references)
 
 ## Introduction
@@ -253,6 +254,8 @@ val res0: Int = 15
 ## Companion Objects
 
 ## Case Classes
+
+## Short-circuit Evaluation
 
 ## References
 
