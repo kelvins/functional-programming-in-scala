@@ -230,17 +230,21 @@ val res18: Int = 24
 ## Tail Recursion
 
 ```scala
-def sum(data: List[Int]): Int = {
-  if data.isEmpty then 0 else data.head + sum(data.tail)
-}
+scala> def gcd(a: Int, b: Int): Int = if (b == 0) a else gcd(b, a % b)
+def gcd(a: Int, b: Int): Int
+
+scala> gcd(21, 14)
+val res0: Int = 7
 ```
 
-```scala
-scala> val data: List[Int] = List(1, 2, 3, 4, 5)
-val data: List[Int] = List(1, 2, 3, 4, 5)
+Not tail recursion:
 
-scala> sum(data)
-val res0: Int = 15
+```scala
+scala> def factorial(n: Int): Int = if (n == 0) 1 else n * factorial(n - 1)
+def factorial(n: Int): Int
+
+scala> factorial(5)
+val res0: Int = 120
 ```
 
 ## Enumerations
