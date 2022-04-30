@@ -274,6 +274,8 @@ scala> @tailrec
 On line 2: error: could not optimize @tailrec annotated method factorial: it contains a recursive call not in tail position
 ```
 
+:warning: `tailrec` is just a check for the programmer to verify if the function will in fact be optimized. If the function already implement the tail recurssion (without `tailrec`) it will be automatically optimized in compilation time.
+
 ## Enumerations
 
 ## Anonymous Functions
