@@ -247,6 +247,33 @@ scala> factorial(5)
 val res0: Int = 120
 ```
 
+In scala we need to use the `tailrec`:
+
+```scala
+scala> import scala.annotation.tailrec
+import scala.annotation.tailrec
+
+scala> @tailrec
+     | def gcd(a: Int, b: Int): Int = if (b == 0) a else gcd(b, a % b)
+def gcd(a: Int, b: Int): Int
+
+scala> gcd(21, 14)
+val res0: Int = 7
+```
+
+If the `tailrec` is used in a function that does not implement the tail recursion it will raise an error:
+
+```scala
+scala> import scala.annotation.tailrec
+import scala.annotation.tailrec
+
+scala> @tailrec
+     | def factorial(n: Int): Int = if (n == 0) 1 else n * factorial(n - 1)
+       def factorial(n: Int): Int = if (n == 0) 1 else n * factorial(n - 1)
+                                                         ^
+On line 2: error: could not optimize @tailrec annotated method factorial: it contains a recursive call not in tail position
+```
+
 ## Enumerations
 
 ## Anonymous Functions
