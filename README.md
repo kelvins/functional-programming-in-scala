@@ -34,24 +34,27 @@ If you have any doubts or suggestions about the content, feel free to contribute
 
 Like many other modern programming languages, Scala is a multi-paradigm language which supports concurrent, functional, imperative and object-oriented paradigms. Despite that, in this document we're going to focus only in the functional paradigm.
 
+> Note that all examples presented below can be reproduced in the Scala REPL
+
 ## Substitution Model
 
 ## Pure Functions
 
-According to [Wikipedia](https://en.wikipedia.org/wiki/Pure_function), pure functions are functions that have the following properties:
+According to the [Wikipedia](https://en.wikipedia.org/wiki/Pure_function) and many other authors, pure functions are functions that have the following properties:
 
-- The function **return value will always be the same** for the same input arguments;
-- The function **has no side effects**.
+- The function **return value will always be the same**: no matter how many times you call the function, it should always return the same value or values for the same input parameters.
+- The function **has no side effects**: the function should not interact with the external world (I/O, databases, external APIs, etc). For this assumption to make sense, the function should always have a return value.
 
-Thus a pure function is a computational analogue of a mathematical function.
+Based on the assumptions above, a pure function is a computational analogue of a mathematical function.
 
-Pure Functions:
+Also, since pure functions are deterministic, they are often easier to test and even understand.
 
-```scala
-def sum(x: Int, y: Int): Int = x + y
-```
+Here is a simple example of a **pure function** that sum `x` and `y`:
 
 ```scala
+scala> def sum(x: Int, y: Int): Int = x + y
+def sum(x: Int, y: Int): Int
+
 scala> sum(10, 5)
 val res0: Int = 15
 
@@ -59,45 +62,43 @@ scala> sum(10, 5)
 val res1: Int = 15
 ```
 
-Impure Functions:
+As you can see, the return value (output) depends only the function parameters (input values).
 
-Side effect:
+Now, let's see an example of an **impure function**:
 
 ```scala
+scala> var y: Int = 5
 var y: Int = 5
 
-def sum(x: Int): Int = {
-  x + y
-}
-```
+scala> def sum(x: Int): Int = x + y
+def sum(x: Int): Int
 
-```scala
-scala> sum(5)
-val res0: Int = 10
+scala> sum(10)
+val res0: Int = 15
 
 scala> y = 10
-y: Int = 10
+// mutated y
 
-scala> sum(5)
-val res1: Int = 15
+scala> sum(10)
+val res1: Int = 20
 ```
 
-Random value:
+As you can see, the `sum` function now depends on the `y` variable, which is in the outer scope. If we change the value of `y` it will affect the result of the `sum` function. So, even when we call the function with the same parameters it will return a different result.
+
+Another example of an **impure function** can be seen in the following snippet:
 
 ```scala
-def sum(x: Int, y: Int): Int = {
-  val rand: Int = scala.util.Random.nextInt(100)
-  x + y + rand
-}
-```
-
-```scala
-scala> sum(10, 5)
-val res0: Int = 73
+scala> def sum(x: Int, y: Int): Int = x + y + scala.util.Random.nextInt(10)
+def sum(x: Int, y: Int): Int
 
 scala> sum(10, 5)
-val res1: Int = 110
+val res0: Int = 17
+
+scala> sum(10, 5)
+val res1: Int = 19
 ```
+
+In the example above the `sum` function is using a random function to generate an integer value and adding it to the sum. So, even when we call the function with the same parameters it will return a different result.
 
 ## Immutability
 
