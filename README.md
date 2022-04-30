@@ -19,6 +19,11 @@ Although the examples are written in Scala, the concepts presented here are gene
 - [Referential Transparency](#referential-transparency)
 - [Tail Recursion](#tail-recursion)
 - [Enumerations](#enumeraions)
+- [Anonymous Functions](#anonymous-functions)
+- [Option, Some, None](#option-some-none)
+- [Try, Success, Failure](#try-success-failure)
+- [Companion Objects](#companion-objects)
+- [Case Classes](#case-classes)
 - [References](#references)
 
 ## Introduction
@@ -213,6 +218,16 @@ val res0: Int = 15
 ```
 
 ## Enumerations
+
+## Anonymous Functions
+
+## Option, Some, None
+
+## Try, Success, Failure
+
+## Companion Objects
+
+## Case Classes
 
 ## References
 
