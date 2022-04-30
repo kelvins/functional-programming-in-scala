@@ -15,9 +15,11 @@ If you have any doubts or suggestions about the content, feel free to contribute
 - [Closures](#closures)
 - [Functional Composition](#functional-composition)
 - [Currying](#currying)
-- [Map](#map)
-- [Filter](#filter)
-- [Reduce](#reduce)
+- [Map, Filter and Reduce](#map-filter-and-reduce)
+    - [Map](#map)
+    - [Filter](#filter)
+    - [Reduce](#reduce)
+    - [Mixing the Trio](#mixing-the-trio)
 - [Referential Transparency](#referential-transparency)
 - [Tail Recursion](#tail-recursion)
 - [Enumerations](#enumerations)
@@ -147,7 +149,9 @@ scala> add10(5)
 val res0: Int = 15
 ```
 
-## Map
+## Map, Filter and Reduce
+
+### Map
 
 ```scala
 scala> val data: List[Int] = List(1, 2, 3, 4, 5)
@@ -170,7 +174,7 @@ scala> data.map(add(1))
 val res0: List[Int] = List(2, 3, 4, 5, 6)
 ```
 
-## Filter
+### Filter
 
 ```scala
 scala> val data: List[Int] = List(1, 2, 3, 4, 5)
@@ -180,7 +184,7 @@ scala> data.filter(_ > 3)
 val res0: List[Int] = List(4, 5)
 ```
 
-## Reduce
+### Reduce
 
 ```scala
 scala> val data: List[Int] = List(1, 2, 3, 4, 5)
@@ -189,6 +193,8 @@ val data: List[Int] = List(1, 2, 3, 4, 5)
 scala> data.reduce(_ + _)
 val res15: Int = 15
 ```
+
+### Mixing the Trio
 
 Combining map, filter and reduce:
 
