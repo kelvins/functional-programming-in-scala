@@ -10,6 +10,7 @@ If you have any doubts or suggestions about the content, feel free to contribute
 - [Introduction](#introduction)
 - [Substitution Model](#substitution-model)
 - [Pure Functions](#pure-functions)
+    - [Impure Functions are Needed](#impure-functions-are-needed)
 - [Immutability](#immutability)
 - [Higher-order Functions](#higher-order-functions)
 - [Closures](#closures)
@@ -62,7 +63,7 @@ scala> sum(10, 5)
 val res1: Int = 15
 ```
 
-As you can see, the return value (output) depends only the function parameters (input values).
+As you can see, the return value (output) depends only on the function parameters (input values).
 
 Now, let's see an example of an **impure function**:
 
@@ -99,6 +100,18 @@ val res1: Int = 19
 ```
 
 In the example above the `sum` function is using a random function to generate an integer value and adding it to the sum. So, even when we call the function with the same parameters it will return a different result.
+
+### Impure Functions are Needed
+
+Even understanding the importance of pure functions, if we stop to think about it, it's practically impossible to create a useful application without reading or writing to the "outside world". So, here's the following recommendation from the Scala documentation:
+
+> Write the core of your application using pure functions, and then write an impure “wrapper” around that core to interact with the outside world.
+
+### Key Points
+
+- A pure function is a function that depends only on its declared inputs to produce its output.
+- A pure function does not read or modify values from the "outside world".
+- Real-world applications consist of a combination of pure and impure functions.
 
 ## Immutability
 
@@ -241,3 +254,4 @@ val res0: Int = 15
 
 - [So You Want to be a Functional Programmer](https://cscalfani.medium.com/so-you-want-to-be-a-functional-programmer-part-1-1f15e387e536) (Charles Scalfani)
 - [Scala Book](https://alvinalexander.com/scala/scala-book-free/) (Alvin Alexander, et al.)
+- [Scala Documentation](https://docs.scala-lang.org/)
