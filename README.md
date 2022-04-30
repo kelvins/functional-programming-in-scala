@@ -11,7 +11,9 @@ If you have any doubts or suggestions about the content, feel free to contribute
 - [Substitution Model](#substitution-model)
 - [Pure Functions](#pure-functions)
     - [Impure Functions are Needed](#impure-functions-are-needed)
+    - [Key Points](#key-points)
 - [Immutability](#immutability)
+    - [Key Points](#key-points-1)
 - [Higher-order Functions](#higher-order-functions)
 - [Closures](#closures)
 - [Functional Composition](#functional-composition)
@@ -142,6 +144,8 @@ longer explanation available when compiling with `-explain`
 ```
 
 It is recommended to use `val` whenever possible.
+
+### Key Points
 
 ## Higher-order Functions
 
