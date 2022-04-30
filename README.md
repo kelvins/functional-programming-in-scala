@@ -1,7 +1,9 @@
 # <img height=25 src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/scala/scala-original.svg" /> Functional Programming in Scala
 
-This repository aims to present simple but useful content related to the core concepts of functional programming with examples in Scala.
-Although the examples are written in Scala, the concepts presented here are general to the functional programming paradigm and can be easily applied to other languages.
+This document aims to present a simple but useful introduction to the core concepts of functional programming with examples in Scala.
+Although the examples are written in Scala, most of the concepts presented here are general to the functional programming paradigm and can be easily applied to other languages.
+
+If you have any doubts or suggestions about the content, feel free to contribute opening an issue or a pull request.
 
 ## Topics
 
@@ -18,7 +20,7 @@ Although the examples are written in Scala, the concepts presented here are gene
 - [Reduce](#reduce)
 - [Referential Transparency](#referential-transparency)
 - [Tail Recursion](#tail-recursion)
-- [Enumerations](#enumeraions)
+- [Enumerations](#enumerations)
 - [Anonymous Functions](#anonymous-functions)
 - [Option, Some, None](#option-some-none)
 - [Try, Success, Failure](#try-success-failure)
@@ -28,8 +30,7 @@ Although the examples are written in Scala, the concepts presented here are gene
 
 ## Introduction
 
-Like many modern programming languages, Scala is a multi-paradigm language which supports concurrent, functional, imperative and object-oriented paradigms.
-Despite that, in these examples we're going to focus only in the functional paradigm.
+Like many other modern programming languages, Scala is a multi-paradigm language which supports concurrent, functional, imperative and object-oriented paradigms. Despite that, in this document we're going to focus only in the functional paradigm.
 
 ## Substitution Model
 
