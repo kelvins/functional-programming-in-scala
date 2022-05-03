@@ -302,11 +302,17 @@ An anonymous function (also known as lambda function) is a function definition t
 scala> val data: List[Int] = List(1, 2, 3)
 val data: List[Int] = List(1, 2, 3)
 
-scala> data.map(x => x * 2)
+scala> def double(x: Int): Int = x * 2
+def double(x: Int): Int
+
+scala> data.map(double)
 val res0: List[Int] = List(2, 4, 6)
 
-scala> data.map(_ * 2)
+scala> data.map(x => x * 2)
 val res1: List[Int] = List(2, 4, 6)
+
+scala> data.map(_ * 2)
+val res2: List[Int] = List(2, 4, 6)
 ```
 
 ## Option, Some, None
