@@ -118,7 +118,9 @@ Even understanding the importance of pure functions, if we stop to think about i
 
 ## Immutability
 
-Mutable
+In simple words, an immutable object is an object which cannot be modified after its creation.
+
+As well as the other topics presented here, immutability is one of the core concepts in functional programming. Unlike other languages like Java, where we need to use the `final` keyword to make something immutable, in Scala we can simply use the keyword `val` instead of `var`, for example:
 
 ```scala
 scala> var y: Int = 10
@@ -126,11 +128,7 @@ var y: Int = 10
 
 scala> y = 5
 y: Int = 5
-```
 
-Immutable
-
-```scala
 scala> val x: Int = 10
 val x: Int = 10
 
@@ -144,9 +142,27 @@ longer explanation available when compiling with `-explain`
 1 error found
 ```
 
-It is recommended to use `val` whenever possible.
+Note that Scala throws a "Type Error" when trying to re-assign the `x` value.
+
+Also, by default function parameters are immutable objects:
+
+```scala
+scala> def addOne(x: Int): Int = x = x + 1
+-- [E052] Type Error: ----------------------------------------------------------
+1 |def addOne(x: Int): Int = x = x + 1
+  |                          ^^^^^^^^^
+  |                          Reassignment to val x
+
+longer explanation available when compiling with `-explain`
+1 error found
+```
+
+Futhermore, Scala splits the collections hierarchy into "immutable" and "mutable" data structures. By default, Scala automatically puts the immutable data structures (such as Map and Set) into your default environment, so if you create a new Map or Set, you automatically get an immutable structure.
 
 ### Key Points
+
+- By default Scala uses immutable objects (e.g. collections like Map and Set).
+- Make your variables immutable, unless there’s a good reason not to.
 
 ## Higher-order Functions
 
