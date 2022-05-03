@@ -183,16 +183,19 @@ val res0: Int = 3
 
 ## Currying
 
-> Currying is the technique of converting a function that takes multiple arguments into a sequence of functions that each takes a single argument
+Currying is a technique of converting a function that takes multiple arguments into a sequence of functions that each takes a single argument. For example, a function `x=f(a, b)` would become two functions `y=g(a)` and `x=y(b)`, or called in sequence `x=g(a)(b)`.
+
+ In functional programming languages it provides a way of automatically managing how arguments are passed to functions, for example:
 
 ```scala
-def add(x: Int)(y: Int): Int = x + y
-```
+scala> def add(x: Int)(y: Int): Int = x + y
+def add(x: Int)(y: Int): Int
 
-```scala
-scala> val add10 = add(10)
-scala> add10(5)
-val res0: Int = 15
+scala> val add10: Int => Int = add(10)
+val add10: Int => Int = Lambda$1390/37235503@236b4a44
+
+scala> add10(15)
+val res0: Int = 25
 ```
 
 ## Map, Filter and Reduce
