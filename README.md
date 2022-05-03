@@ -296,6 +296,19 @@ On line 2: error: could not optimize @tailrec annotated method factorial: it con
 
 ## Anonymous Functions
 
+An anonymous function (also known as lambda function) is a function definition that is not bound to an identifier. Anonymous functions are often used as arguments being passed to higher-order functions or used as a return value from higher-order functions that needs to return a function. If the function is only used once, or a limited number of times, an anonymous function may be syntactically lighter than using a named function.
+
+```scala
+scala> val data: List[Int] = List(1, 2, 3)
+val data: List[Int] = List(1, 2, 3)
+
+scala> data.map(x => x * 2)
+val res0: List[Int] = List(2, 4, 6)
+
+scala> data.map(_ * 2)
+val res1: List[Int] = List(2, 4, 6)
+```
+
 ## Option, Some, None
 
 ## Try, Success, Failure
@@ -311,3 +324,4 @@ On line 2: error: could not optimize @tailrec annotated method factorial: it con
 - [So You Want to be a Functional Programmer](https://cscalfani.medium.com/so-you-want-to-be-a-functional-programmer-part-1-1f15e387e536) (Charles Scalfani)
 - [Scala Book](https://alvinalexander.com/scala/scala-book-free/) (Alvin Alexander, et al.)
 - [Scala Documentation](https://docs.scala-lang.org/)
+- [Anonymous Functions](https://en.wikipedia.org/wiki/Anonymous_function)
