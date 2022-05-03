@@ -166,6 +166,17 @@ Futhermore, Scala splits the collections hierarchy into "immutable" and "mutable
 
 ## Higher-order Functions
 
+```scala
+scala> def sum(x: Int, y: Int): Int = x + y
+def sum(x: Int, y: Int): Int
+
+scala> def calculate(func: (Int, Int) => Int, x: Int, y: Int): Int = func(x, y)
+def calculate(func: (Int, Int) => Int, x: Int, y: Int): Int
+
+scala> calculate(sum, 1, 2)
+val res0: Int = 3
+```
+
 ## Closures
 
 ## Functional Composition
