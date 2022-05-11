@@ -335,6 +335,36 @@ val res2: List[Int] = List(2, 4, 6)
 
 ## Companion Objects
 
+The _companion object_ concept is not exactly related to functional programming but is broadly used in Scala code.
+
+A companion object in Scala is an `object` that is declared in the same file as a `class`, and has the same name as the class, for example:
+
+```scala
+class Settings {
+  def showPath() = println(Settings.path)
+}
+
+object Settings {
+  private val path = "tmp/settings.json"
+}
+```
+
+And it is possible to use it as follows:
+
+```scala
+scala> new Settings().showPath()
+tmp/settings.json
+```
+
+Besides that, companion objects have several benefits like:
+- Companion objects can access each other's private members.
+- Create new instances of a class without using the `new` keyword.
+- Create multiple constructors for a class.
+- Allows the creation of an `unapply` method.
+- Allows the creation of functions like "static methods".
+
+More details about companion objects can be found in the [Scala Book page](https://docs.scala-lang.org/overviews/scala-book/companion-objects.html).
+
 ## Case Classes
 
 ## Short-circuit Evaluation
