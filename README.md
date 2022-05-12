@@ -179,6 +179,8 @@ val res0: Int = 3
 
 ## Closures
 
+https://alvinalexander.com/scala/how-to-use-closures-in-scala-fp-examples/
+
 ## Functional Composition
 
 ## Currying
@@ -368,6 +370,17 @@ More details about companion objects can be found in the [Scala Book page](https
 ## Case Classes
 
 ## Short-circuit Evaluation
+
+```scala
+scala> true || (5 / 0) == 1
+val res0: Boolean = true
+
+scala> false || (5 / 0) == 0
+java.lang.ArithmeticException: / by zero
+  ... 39 elided
+```
+
+https://en.wikipedia.org/wiki/Short-circuit_evaluation
 
 ## References
 
