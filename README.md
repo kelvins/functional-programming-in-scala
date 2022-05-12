@@ -32,6 +32,7 @@ If you have any doubts or suggestions about the content, feel free to contribute
 - [Companion Objects](#companion-objects)
 - [Case Classes](#case-classes)
 - [Short-circuit Evaluation](#short-circuit-evaluation)
+- [Singleton Object](#singleton-object)
 - [References](#references)
 
 ## Introduction
@@ -381,6 +382,8 @@ java.lang.ArithmeticException: / by zero
 ```
 
 https://en.wikipedia.org/wiki/Short-circuit_evaluation
+
+## Singleton Object
 
 ## References
 
