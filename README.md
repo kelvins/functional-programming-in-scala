@@ -33,6 +33,7 @@ If you have any doubts or suggestions about the content, feel free to contribute
 - [Case Classes](#case-classes)
 - [Short-circuit Evaluation](#short-circuit-evaluation)
 - [Singleton Object](#singleton-object)
+- [Tips](#tips)
 - [References](#references)
 
 ## Introduction
@@ -384,6 +385,10 @@ java.lang.ArithmeticException: / by zero
 https://en.wikipedia.org/wiki/Short-circuit_evaluation
 
 ## Singleton Object
+
+## Tips
+
+If you are completely new to Scala, I really recommend the Udemy course "[Scala at Light Speed](https://www.udemy.com/course/fast-scala/)". It is a really quick course (~2h) that will give you a great overview about the language and its syntax.
 
 ## References
 
