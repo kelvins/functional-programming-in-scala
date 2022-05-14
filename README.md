@@ -12,18 +12,12 @@ If you have any doubts or suggestions about the content, feel free to contribute
 - [Immutability](#immutability)
 - [Pure Functions](#pure-functions)
 - [Higher-order Functions](#higher-order-functions)
-- [Closures](#closures)
-- [Functional Composition](#functional-composition)
 - [Currying](#currying)
+- [Anonymous Functions](#anonymous-functions)
 - [Map, Filter and Reduce](#map-filter-and-reduce)
-    - [Map](#map)
-    - [Filter](#filter)
-    - [Reduce](#reduce)
-    - [Mixing the Trio](#mixing-the-trio)
 - [Referential Transparency](#referential-transparency)
 - [Tail Recursion](#tail-recursion)
 - [Enumerations](#enumerations)
-- [Anonymous Functions](#anonymous-functions)
 - [Option, Some, None](#option-some-none)
 - [Try, Success, Failure](#try-success-failure)
 - [Companion Objects](#companion-objects)
@@ -298,17 +292,16 @@ val res0: Int = 5
 
 As you will see later, some built-in functions like `.map()` and `.filter()` are great examples of higher-order functions.
 
-## Closures
+### Key Points
 
-https://alvinalexander.com/scala/how-to-use-closures-in-scala-fp-examples/
-
-## Functional Composition
+- Higher-order functions can take one or more functions as arguments and/or return a function.
+- Higher-order functions are used everywhere in functional programming.
 
 ## Currying
 
 Currying is a technique of converting a function that takes multiple arguments into a sequence of functions that each takes a single argument. For example, a function `x=f(a, b)` would become two functions `y=g(a)` and `x=y(b)`, or called in sequence `x=g(a)(b)`.
 
- In functional programming languages it provides a way of automatically managing how arguments are passed to functions, for example:
+In functional programming languages it provides a way of automatically managing how arguments are passed to functions, for example:
 
 ```scala
 scala> def add(x: Int)(y: Int): Int = x + y
@@ -321,17 +314,76 @@ scala> add10(15)
 val res0: Int = 25
 ```
 
+Note that it could also be represented as a closure:
+
+```scala
+scala> def add(x: Int): (Int) => Int = {
+     |   def innerFunction(y: Int): Int = x + y
+     |   innerFunction
+     | }
+def add(x: Int): Int => Int
+
+scala> val add10: Int => Int = add(10)
+val add10: Int => Int = $Lambda$1078/0x000000080100add8@536b71b4
+
+scala> add10(15)
+val res0: Int = 25
+```
+
+But using the currying syntax is much easier.
+
+### Key Points
+
+- Currying is a technique of converting a function that takes multiple arguments into a sequence of functions that each takes a single argument.
+- Currying is very useful when you need to apply some initial values to many other values/objects.
+
+## Anonymous Functions
+
+An anonymous function (also known as lambda function) is a function definition that is not bound to an identifier. Anonymous functions are often used as arguments being passed to higher-order functions or used as a return value from higher-order functions that needs to return a function. If the function is only used once, or a limited number of times, an anonymous function may be syntactically lighter than using a named function.
+
+```scala
+scala> val data: List[Int] = List(1, 2, 3)
+val data: List[Int] = List(1, 2, 3)
+
+scala> def double(x: Int): Int = x * 2
+def double(x: Int): Int
+
+scala> data.map(double)
+val res0: List[Int] = List(2, 4, 6)
+
+scala> data.map(x => x * 2)
+val res1: List[Int] = List(2, 4, 6)
+
+scala> data.map(_ * 2)
+val res2: List[Int] = List(2, 4, 6)
+```
+
 ## Map, Filter and Reduce
 
+The functions `.map()`, `.filter()` and `.reduce()` are well know functions and are used in many programming languages, but in functional programming they are even more important since it avoids loops and modifying values from the outer scope. It is important to note that these functions always return a new object.
+
 ### Map
+
+The `.map()` function basically applies a function, passed as argument, to each value of a sequence of values, for example:
 
 ```scala
 scala> val data: List[Int] = List(1, 2, 3, 4, 5)
 val data: List[Int] = List(1, 2, 3, 4, 5)
 
-scala> data.map(_ * 2)
+scala> def double(x: Int): Int = x * 2
+def double(x: Int): Int
+
+scala> data.map(double)
 val res0: List[Int] = List(2, 4, 6, 8, 10)
+
+scala> data.map(_ * 2) // using anonymous functions
+val res1: List[Int] = List(2, 4, 6, 8, 10)
+
+scala> data
+val res2: List[Int] = List(1, 2, 3, 4, 5)
 ```
+
+In the example above it applies the `double` function to each element of the list and returns a new list object (as you can see in the last line, the original data was not modified).
 
 Combining currying with map:
 
@@ -342,11 +394,13 @@ val data: List[Int] = List(1, 2, 3, 4, 5)
 scala> def add(x: Int)(y: Int): Int = x + y
 def add(x: Int)(y: Int): Int
 
-scala> data.map(add(1))
-val res0: List[Int] = List(2, 3, 4, 5, 6)
+scala> data.map(add(3))
+val res0: List[Int] = List(4, 5, 6, 7, 8)
 ```
 
 ### Filter
+
+The `.filter()` function basically applies a function that returns a boolean, and is passed as argument, to each value of a sequence of values, for example:
 
 ```scala
 scala> val data: List[Int] = List(1, 2, 3, 4, 5)
@@ -356,27 +410,48 @@ scala> data.filter(_ > 3)
 val res0: List[Int] = List(4, 5)
 ```
 
+As you can see the final result is a new list containing the objects that had a `true` assert when passing by the filter function (in this case, only values higher than 3).
+
 ### Reduce
+
+The `.reduce()` function basically applies a function to each value and keeps an "accumulator" so it is used to reduce multiple values to a single one, for example:
 
 ```scala
 scala> val data: List[Int] = List(1, 2, 3, 4, 5)
 val data: List[Int] = List(1, 2, 3, 4, 5)
 
+scala> def sum(acc: Int, value: Int): Int = {
+     |   println(s"acc: $acc, value: $value")
+     |   acc + value
+     | }
+def sum(acc: Int, value: Int): Int
+
+scala> data.reduce(sum)
+acc: 1, value: 2
+acc: 3, value: 3
+acc: 6, value: 4
+acc: 10, value: 5
+val res0: Int = 15
+
 scala> data.reduce(_ + _)
-val res15: Int = 15
+val res1: Int = 15
 ```
 
-### Mixing the Trio
-
-Combining map, filter and reduce:
+### Mixing them all
 
 ```scala
 scala> val data: List[Int] = List(1, 2, 3, 4, 5)
 val data: List[Int] = List(1, 2, 3, 4, 5)
 
 scala> data.map(_ * 2).filter(_ > 5).reduce(_ + _)
-val res18: Int = 24
+val res0: Int = 24
 ```
+
+### Key Points
+
+- Map, filter and reduce are always applied to every single value of a sequence.
+- Map, filter and reduce are not hard to understand and can make your life much easier.
+- Map, filter and reduce are used everywhere in functional programming.
 
 ## Referential Transparency
 
@@ -430,27 +505,6 @@ On line 2: error: could not optimize @tailrec annotated method factorial: it con
 :warning: `tailrec` is just a check for the programmer to verify if the function will in fact be optimized. If the function already implement the tail recurssion (without `tailrec`) it will be automatically optimized in compilation time.
 
 ## Enumerations
-
-## Anonymous Functions
-
-An anonymous function (also known as lambda function) is a function definition that is not bound to an identifier. Anonymous functions are often used as arguments being passed to higher-order functions or used as a return value from higher-order functions that needs to return a function. If the function is only used once, or a limited number of times, an anonymous function may be syntactically lighter than using a named function.
-
-```scala
-scala> val data: List[Int] = List(1, 2, 3)
-val data: List[Int] = List(1, 2, 3)
-
-scala> def double(x: Int): Int = x * 2
-def double(x: Int): Int
-
-scala> data.map(double)
-val res0: List[Int] = List(2, 4, 6)
-
-scala> data.map(x => x * 2)
-val res1: List[Int] = List(2, 4, 6)
-
-scala> data.map(_ * 2)
-val res2: List[Int] = List(2, 4, 6)
-```
 
 ## Option, Some, None
 
