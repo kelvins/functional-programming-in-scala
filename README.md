@@ -9,11 +9,8 @@ If you have any doubts or suggestions about the content, feel free to contribute
 
 - [Introduction](#introduction)
 - [Substitution Model](#substitution-model)
-- [Pure Functions](#pure-functions)
-    - [Impure Functions are Needed](#impure-functions-are-needed)
-    - [Key Points](#key-points)
 - [Immutability](#immutability)
-    - [Key Points](#key-points-1)
+- [Pure Functions](#pure-functions)
 - [Higher-order Functions](#higher-order-functions)
 - [Closures](#closures)
 - [Functional Composition](#functional-composition)
@@ -128,6 +125,59 @@ As you can see it evaluates only the `x` value which is being used inside the fu
 
 More details about Scala substitution model can be found in [this article](http://bkpathak.github.io/scala-substitution-model#:~:text=Scala%20model%20of%20expression%20evaluation,does%20not%20need%20further%20evaluation.).
 
+### Key Points
+
+- Scala uses the `call-by-value` strategy by default.
+- It is important to understand the difference between `call-by-name` and `call-by-value` but in most cases you don't need to worry about it.
+
+## Immutability
+
+In simple words, an immutable object is an object which cannot be modified after its creation.
+
+As well as the other topics presented here, immutability is one of the core concepts in functional programming. Unlike other languages like Java, where you need to use the `final` keyword to make something immutable, in Scala we can simply use the keyword `val` instead of `var`, for example:
+
+```scala
+scala> var y: Int = 10
+var y: Int = 10
+
+scala> y = 5
+y: Int = 5
+
+scala> val x: Int = 10
+val x: Int = 10
+
+scala> x = 5
+-- [E052] Type Error: ----------------------------------------------------------
+1 |x = 5
+  |^^^^^
+  |Reassignment to val x
+
+longer explanation available when compiling with `-explain`
+1 error found
+```
+
+Note that Scala throws a `Type Error` when trying to re-assign the `x` value.
+
+Also, by default function parameters are immutable objects:
+
+```scala
+scala> def addOne(x: Int): Int = x = x + 1
+-- [E052] Type Error: ----------------------------------------------------------
+1 |def addOne(x: Int): Int = x = x + 1
+  |                          ^^^^^^^^^
+  |                          Reassignment to val x
+
+longer explanation available when compiling with `-explain`
+1 error found
+```
+
+Futhermore, Scala splits the collections hierarchy into "immutable" and "mutable" data structures. By default, Scala automatically puts the immutable data structures (such as Map and Set) into your default environment, so if you create a new Map or Set, you'll automatically get an immutable structure.
+
+### Key Points
+
+- By default Scala uses immutable objects (e.g. collections like Map and Set).
+- Make your "variables" immutable, unless there’s a good reason not to.
+
 ## Pure Functions
 
 According to the [Wikipedia](https://en.wikipedia.org/wiki/Pure_function) and many other authors, pure functions are functions that have the following properties:
@@ -154,7 +204,7 @@ val res1: Int = 15
 
 As you can see, the return value (output) depends only on the function parameters (input values).
 
-Now, let's see an example of an **impure function**:
+Now, here is an example of an **impure function**:
 
 ```scala
 scala> var y: Int = 5
@@ -173,7 +223,7 @@ scala> sum(10)
 val res1: Int = 20
 ```
 
-As you can see, the `sum` function now depends on the `y` variable, which is in the outer scope. If we change the value of `y` it will affect the result of the `sum` function. So, even when we call the function with the same parameters it will return a different result.
+As you can see, the `sum` function now depends on the `y` variable, which is in the outer scope. If you change the value of `y` it will affect the result of the `sum` function. So, even when calling the function with the same parameters it will return a different result.
 
 Another example of an **impure function** can be seen in the following snippet:
 
@@ -192,7 +242,7 @@ In the example above the `sum` function is using a random function to generate a
 
 ### Impure Functions are Needed
 
-Even understanding the importance of pure functions, if we stop to think about it, it's practically impossible to create a useful application without reading or writing to the "outside world". So, here's the following recommendation from the Scala documentation:
+Even understanding the importance of pure functions, when stopping to think about it, it's practically impossible to create a useful application without reading or writing to the "outside world". So, here's the following recommendation from the Scala documentation:
 
 > Write the core of your application using pure functions, and then write an impure “wrapper” around that core to interact with the outside world.
 
@@ -202,66 +252,51 @@ Even understanding the importance of pure functions, if we stop to think about i
 - A pure function does not read or modify values from the "outside world".
 - Real-world applications consist of a combination of pure and impure functions.
 
-## Immutability
-
-In simple words, an immutable object is an object which cannot be modified after its creation.
-
-As well as the other topics presented here, immutability is one of the core concepts in functional programming. Unlike other languages like Java, where we need to use the `final` keyword to make something immutable, in Scala we can simply use the keyword `val` instead of `var`, for example:
-
-```scala
-scala> var y: Int = 10
-var y: Int = 10
-
-scala> y = 5
-y: Int = 5
-
-scala> val x: Int = 10
-val x: Int = 10
-
-scala> x = 5
--- [E052] Type Error: ----------------------------------------------------------
-1 |x = 5
-  |^^^^^
-  |Reassignment to val x
-
-longer explanation available when compiling with `-explain`
-1 error found
-```
-
-Note that Scala throws a "Type Error" when trying to re-assign the `x` value.
-
-Also, by default function parameters are immutable objects:
-
-```scala
-scala> def addOne(x: Int): Int = x = x + 1
--- [E052] Type Error: ----------------------------------------------------------
-1 |def addOne(x: Int): Int = x = x + 1
-  |                          ^^^^^^^^^
-  |                          Reassignment to val x
-
-longer explanation available when compiling with `-explain`
-1 error found
-```
-
-Futhermore, Scala splits the collections hierarchy into "immutable" and "mutable" data structures. By default, Scala automatically puts the immutable data structures (such as Map and Set) into your default environment, so if you create a new Map or Set, you automatically get an immutable structure.
-
-### Key Points
-
-- By default Scala uses immutable objects (e.g. collections like Map and Set).
-- Make your variables immutable, unless there’s a good reason not to.
-
 ## Higher-order Functions
+
+In short, higher-order functions are functions that can take other functions as arguments and/or return functions. All other functions are first-order functions. Here is an example of a higher-order function `calculate` that takes a function `func` as argument and uses it to do the calculation:
 
 ```scala
 scala> def sum(x: Int, y: Int): Int = x + y
 def sum(x: Int, y: Int): Int
 
+scala> def mult(x: Int, y: Int): Int = x * y
+def mult(x: Int, y: Int): Int
+
 scala> def calculate(func: (Int, Int) => Int, x: Int, y: Int): Int = func(x, y)
 def calculate(func: (Int, Int) => Int, x: Int, y: Int): Int
 
-scala> calculate(sum, 1, 2)
-val res0: Int = 3
+scala> calculate(sum, 2, 3)
+val res0: Int = 5
+
+scala> calculate(mult, 2, 3)
+val res1: Int = 6
 ```
+
+It is also possible to return functions, for example:
+
+```scala
+scala> def sum(x: Int, y: Int): Int = x + y
+def sum(x: Int, y: Int): Int
+
+scala> def mult(x: Int, y: Int): Int = x * y
+def mult(x: Int, y: Int): Int
+
+scala> def getFunction(functionName: String): (Int, Int) => Int = functionName match {
+     |   case "sum"  => sum
+     |   case "mult" => mult
+     |   case _      => throw new Exception("Invalid function name")
+     | }
+def getFunction(functionName: String): (Int, Int) => Int
+
+scala> val calculate: (Int, Int) => Int = getFunction("sum")
+val calculate: (Int, Int) => Int = $Lambda$1087/0x000000080100b5d0@439f2d87
+
+scala> calculate(2, 3)
+val res0: Int = 5
+```
+
+As you will see later, some built-in functions like `.map()` and `.filter()` are great examples of higher-order functions.
 
 ## Closures
 
