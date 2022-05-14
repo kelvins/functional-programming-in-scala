@@ -8,22 +8,20 @@ If you have any doubts or suggestions about the content, feel free to contribute
 ## Topics
 
 - [Introduction](#introduction)
-- [Substitution Model](#substitution-model)
 - [Immutability](#immutability)
 - [Pure Functions](#pure-functions)
 - [Higher-order Functions](#higher-order-functions)
 - [Currying](#currying)
 - [Anonymous Functions](#anonymous-functions)
 - [Map, Filter and Reduce](#map-filter-and-reduce)
-- [Referential Transparency](#referential-transparency)
 - [Tail Recursion](#tail-recursion)
-- [Enumerations](#enumerations)
 - [Option, Some, None](#option-some-none)
 - [Try, Success, Failure](#try-success-failure)
 - [Companion Objects](#companion-objects)
 - [Case Classes](#case-classes)
 - [Short-circuit Evaluation](#short-circuit-evaluation)
 - [Singleton Object](#singleton-object)
+- [Substitution Model](#substitution-model)
 - [Tips](#tips)
 - [References](#references)
 
@@ -34,95 +32,6 @@ Like many other modern programming languages, Scala is a multi-paradigm language
 Scala is designed to express common programming patterns in a concise, elegant, and type-safe way. Furthermore, Scala provides a lightweight syntax for defining anonymous functions, it supports higher-order functions, it allows functions to be nested, and it supports currying. Scala’s case classes and its built-in support for pattern matching provide the functionality of algebraic types, which are used in many functional languages. Also, singleton objects provide a convenient way to group functions that aren’t members of a class.
 
 In the following sections you're going to find some practical examples about these functional programming concepts. Note that the examples can be reproduced in the Scala REPL.
-
-## Substitution Model
-
-Scala uses the principle of substitution model to evaluate expressions. The idea is that all evaluation reduce an expression to a value so, for example, variable names are replaced by the values they are bound to. The expressions are evaluated in the same way we would evaluate a mathematical expression, for example:
-
-```scala
-scala> def x = 5
-scala> def y = 10
-scala> (3 * x) + (2 * y)
-```
-
-```
--> (3 * 5) + (2 * y)
--> 15 + (2 * 10)
--> 15 + 20
--> 35
-```
-
-Functions are evaluated in the same way as expressions, for example:
-
-```scala
-scala> def square(x: Double) = x * x
-scala> square(2 + 3)
-```
-
-```
--> square(5)
--> 5 * 5
--> 25
-```
-
-But in function evaluation there are two strategies called `call-by-name` and `call-by-value`. Here is an example of how both work:
-
-```scala
-scala> def square(x: Double) = x * x
-scala> def sumOfSquares(x: Int, y: Int) = square(x) + square(y)
-```
-
-- `call-by-value`: evaluates every function argument only once thus it avoids the repeated evaluation of arguments.
-
-```
--> sumOfSquares(2, 2 + 3)
--> sumOfSquares(2, 5)
--> square(2) + square(5)
--> 2 * 2 + 5 * 5
--> 4 + 25
--> 29
-```
-
-- `call-by-name`: avoids evaluation of parameters if it is not used in the function body.
-
-```
--> sumOfSquares(2, 2 + 3)
--> square(2) + square(2 + 3)
--> 2 * 2 + square(2 + 3)
--> 4 + (2 + 3) * (2 + 3)
--> 4 + 5 * (2 + 3)
--> 4 + 5 * 5
--> 4 + 25
--> 29
-```
-
-As you can see, `call-by-value` is more efficient then `call-by-name` so Scala uses `call-by-value` as the default evaluation strategy, however you can force it to use the `call-by-name` strategy using the follwing syntax `=>`, for example:
-
-```scala
-scala> def loop: Int = loop
-scala> def test(x: Int, y: => Int) = x
-scala> test(1, loop) // infinite loop
-```
-
-The above example uses `call-by-value` and enter the infinite loop.
-
-Now the same example using `call-by-name`:
-
-```scala
-scala> def loop: Int = loop
-scala> def test(x: Int, y: => Int) = x
-scala> test(1, loop)
-val res0: Int = 1
-```
-
-As you can see it evaluates only the `x` value which is being used inside the function and returns it.
-
-More details about Scala substitution model can be found in [this article](http://bkpathak.github.io/scala-substitution-model#:~:text=Scala%20model%20of%20expression%20evaluation,does%20not%20need%20further%20evaluation.).
-
-### Key Points
-
-- Scala uses the `call-by-value` strategy by default.
-- It is important to understand the difference between `call-by-name` and `call-by-value` but in most cases you don't need to worry about it.
 
 ## Immutability
 
@@ -453,36 +362,51 @@ val res0: Int = 24
 - Map, filter and reduce are not hard to understand and can make your life much easier.
 - Map, filter and reduce are used everywhere in functional programming.
 
-## Referential Transparency
-
 ## Tail Recursion
 
-```scala
-scala> def gcd(a: Int, b: Int): Int = if (b == 0) a else gcd(b, a % b)
-def gcd(a: Int, b: Int): Int
+[This](https://stackoverflow.com/a/33930/4946821) great StackOverflow answer explains that in traditional recursion, the typical model is that you perform your recursive calls first, and then you take the return value of the recursive call and calculate the result. In this manner, you don't get the result of your calculation until you have returned from every recursive call.
 
-scala> gcd(21, 14)
-val res0: Int = 7
-```
+In tail recursion, you perform your calculations first, and then you execute the recursive call, passing the results of your current step to the next recursive step. Basically, the return value of any given recursive step is the same as the return value of the next recursive call.
 
-Not tail recursion:
+The consequence of this is that once you are ready to perform your next recursive step, you don't need the current stack frame anymore. This allows for some optimization. It will simply reuse the current stack frame for the next recursive step
+
+The following example shows a function that, at first glance, looks like a tail recursive function but it is not because the last action multiplies a value of the current step with the recursive call:
 
 ```scala
-scala> def factorial(n: Int): Int = if (n == 0) 1 else n * factorial(n - 1)
+scala> def factorial(n: Int): Int = {
+     |   if (n <= 1) 1
+     |   else n * factorial(n - 1)
+     | }
 def factorial(n: Int): Int
 
 scala> factorial(5)
 val res0: Int = 120
 ```
 
-In scala we need to use the `tailrec`:
+Now, the following exaple calculates the Greatest Common Divisor (GCD) using the tail recursion technique:
+
+```scala
+scala> def gcd(a: Int, b: Int): Int = {
+     |   if (b == 0) a
+     |   else gcd(b, a % b)
+     | }
+def gcd(a: Int, b: Int): Int
+
+scala> gcd(21, 14)
+val res0: Int = 7
+```
+
+Scala has an annotation called `tailrec` that helps in identifying functions that uses tail recursion, for example:
 
 ```scala
 scala> import scala.annotation.tailrec
 import scala.annotation.tailrec
 
 scala> @tailrec
-     | def gcd(a: Int, b: Int): Int = if (b == 0) a else gcd(b, a % b)
+     | def gcd(a: Int, b: Int): Int = {
+     |   if (b == 0) a
+     |   else gcd(b, a % b)
+     | }
 def gcd(a: Int, b: Int): Int
 
 scala> gcd(21, 14)
@@ -496,15 +420,16 @@ scala> import scala.annotation.tailrec
 import scala.annotation.tailrec
 
 scala> @tailrec
-     | def factorial(n: Int): Int = if (n == 0) 1 else n * factorial(n - 1)
-       def factorial(n: Int): Int = if (n == 0) 1 else n * factorial(n - 1)
-                                                         ^
-On line 2: error: could not optimize @tailrec annotated method factorial: it contains a recursive call not in tail position
+     | def factorial(n: Int): Int = {
+     |   if (n <= 1) 1
+     |   else n * factorial(n - 1)
+     | }
+         else n * factorial(n - 1)
+                ^
+On line 4: error: could not optimize @tailrec annotated method factorial: it contains a recursive call not in tail position
 ```
 
 :warning: `tailrec` is just a check for the programmer to verify if the function will in fact be optimized. If the function already implement the tail recurssion (without `tailrec`) it will be automatically optimized in compilation time.
-
-## Enumerations
 
 ## Option, Some, None
 
@@ -558,6 +483,95 @@ java.lang.ArithmeticException: / by zero
 https://en.wikipedia.org/wiki/Short-circuit_evaluation
 
 ## Singleton Object
+
+## Substitution Model
+
+Scala uses the principle of substitution model to evaluate expressions. The idea is that all evaluation reduce an expression to a value so, for example, variable names are replaced by the values they are bound to. The expressions are evaluated in the same way we would evaluate a mathematical expression, for example:
+
+```scala
+scala> def x = 5
+scala> def y = 10
+scala> (3 * x) + (2 * y)
+```
+
+```
+-> (3 * 5) + (2 * y)
+-> 15 + (2 * 10)
+-> 15 + 20
+-> 35
+```
+
+Functions are evaluated in the same way as expressions, for example:
+
+```scala
+scala> def square(x: Double) = x * x
+scala> square(2 + 3)
+```
+
+```
+-> square(5)
+-> 5 * 5
+-> 25
+```
+
+But in function evaluation there are two strategies called `call-by-name` and `call-by-value`. Here is an example of how both work:
+
+```scala
+scala> def square(x: Double) = x * x
+scala> def sumOfSquares(x: Int, y: Int) = square(x) + square(y)
+```
+
+- `call-by-value`: evaluates every function argument only once thus it avoids the repeated evaluation of arguments.
+
+```
+-> sumOfSquares(2, 2 + 3)
+-> sumOfSquares(2, 5)
+-> square(2) + square(5)
+-> 2 * 2 + 5 * 5
+-> 4 + 25
+-> 29
+```
+
+- `call-by-name`: avoids evaluation of parameters if it is not used in the function body.
+
+```
+-> sumOfSquares(2, 2 + 3)
+-> square(2) + square(2 + 3)
+-> 2 * 2 + square(2 + 3)
+-> 4 + (2 + 3) * (2 + 3)
+-> 4 + 5 * (2 + 3)
+-> 4 + 5 * 5
+-> 4 + 25
+-> 29
+```
+
+As you can see, `call-by-value` is more efficient then `call-by-name` so Scala uses `call-by-value` as the default evaluation strategy, however you can force it to use the `call-by-name` strategy using the follwing syntax `=>`, for example:
+
+```scala
+scala> def loop: Int = loop
+scala> def test(x: Int, y: => Int) = x
+scala> test(1, loop) // infinite loop
+```
+
+The above example uses `call-by-value` and enter the infinite loop.
+
+Now the same example using `call-by-name`:
+
+```scala
+scala> def loop: Int = loop
+scala> def test(x: Int, y: => Int) = x
+scala> test(1, loop)
+val res0: Int = 1
+```
+
+As you can see it evaluates only the `x` value which is being used inside the function and returns it.
+
+More details about Scala substitution model can be found in [this article](http://bkpathak.github.io/scala-substitution-model#:~:text=Scala%20model%20of%20expression%20evaluation,does%20not%20need%20further%20evaluation.).
+
+### Key Points
+
+- Scala uses the `call-by-value` strategy by default.
+- It is important to understand the difference between `call-by-name` and `call-by-value` but in most cases you don't need to worry about it.
 
 ## Tips
 
