@@ -15,8 +15,6 @@ If you have any doubts or suggestions about the content, feel free to contribute
 - [Anonymous Functions](#anonymous-functions)
 - [Map, Filter and Reduce](#map-filter-and-reduce)
 - [Tail Recursion](#tail-recursion)
-- [Option, Some, None](#option-some-none)
-- [Try, Success, Failure](#try-success-failure)
 - [Companion Objects](#companion-objects)
 - [Case Classes](#case-classes)
 - [Short-circuit Evaluation](#short-circuit-evaluation)
@@ -430,10 +428,6 @@ On line 4: error: could not optimize @tailrec annotated method factorial: it con
 ```
 
 :warning: `tailrec` is just a check for the programmer to verify if the function will in fact be optimized. If the function already implement the tail recurssion (without `tailrec`) it will be automatically optimized in compilation time.
-
-## Option, Some, None
-
-## Try, Success, Failure
 
 ## Companion Objects
 
