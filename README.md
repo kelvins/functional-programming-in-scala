@@ -5,6 +5,8 @@ Although the examples are written in Scala, most of the concepts presented here 
 
 If you have any doubts or suggestions about the content, feel free to contribute opening an issue or a pull request.
 
+> This document was created as a personal effort for studying Scala and functional programming and will likely have updates over time.
+
 ## Topics
 
 - [Introduction](#introduction)
