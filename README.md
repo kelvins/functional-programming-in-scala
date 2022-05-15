@@ -16,11 +16,8 @@ If you have any doubts or suggestions about the content, feel free to contribute
 - [Map, Filter and Reduce](#map-filter-and-reduce)
 - [Tail Recursion](#tail-recursion)
 - [Companion Objects](#companion-objects)
-- [Case Classes](#case-classes)
-- [Short-circuit Evaluation](#short-circuit-evaluation)
-- [Singleton Object](#singleton-object)
 - [Substitution Model](#substitution-model)
-- [Tips](#tips)
+- [Where to go next](#where-to-go-next)
 - [References](#references)
 
 ## Introduction
@@ -255,13 +252,13 @@ val data: List[Int] = List(1, 2, 3)
 scala> def double(x: Int): Int = x * 2
 def double(x: Int): Int
 
-scala> data.map(double)
+scala> data.map(double) // map using named function
 val res0: List[Int] = List(2, 4, 6)
 
-scala> data.map(x => x * 2)
+scala> data.map(x => x * 2) // map using anonymous function
 val res1: List[Int] = List(2, 4, 6)
 
-scala> data.map(_ * 2)
+scala> data.map(_ * 2) // map using anonymous function (concise version)
 val res2: List[Int] = List(2, 4, 6)
 ```
 
@@ -455,28 +452,11 @@ tmp/settings.json
 Besides that, companion objects have several benefits like:
 - Companion objects can access each other's private members.
 - Create new instances of a class without using the `new` keyword.
-- Create multiple constructors for a class.
+- Create multiple "constructors" (actually factory methods) for a class.
 - Allows the creation of an `unapply` method.
-- Allows the creation of functions like "static methods".
+- Allows the creation of functions that acts like "static methods".
 
 More details about companion objects can be found in the [Scala Book page](https://docs.scala-lang.org/overviews/scala-book/companion-objects.html).
-
-## Case Classes
-
-## Short-circuit Evaluation
-
-```scala
-scala> true || (5 / 0) == 1
-val res0: Boolean = true
-
-scala> false || (5 / 0) == 0
-java.lang.ArithmeticException: / by zero
-  ... 39 elided
-```
-
-https://en.wikipedia.org/wiki/Short-circuit_evaluation
-
-## Singleton Object
 
 ## Substitution Model
 
@@ -567,9 +547,11 @@ More details about Scala substitution model can be found in [this article](http:
 - Scala uses the `call-by-value` strategy by default.
 - It is important to understand the difference between `call-by-name` and `call-by-value` but in most cases you don't need to worry about it.
 
-## Tips
+## Where to go next
 
-If you are completely new to Scala, I really recommend the Udemy course "[Scala at Light Speed](https://www.udemy.com/course/fast-scala/)". It is a really quick course (~2h) that will give you a great overview about the language and its syntax.
+If you are completely new to Scala, I really recommend the [Scala Book](https://alvinalexander.com/scala/scala-book-free/), it is a relatively short book and covers the most important topics related to the language.
+
+Another great source of knowledge for beginners is the Udemy course "[Scala at Light Speed](https://www.udemy.com/course/fast-scala/)", which is a quick course (~2h) that will give you an overview about the language and its syntax.
 
 ## References
 
