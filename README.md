@@ -555,6 +555,8 @@ If you are completely new to Scala, I really recommend the [Scala Book](https://
 
 Another great source of knowledge for beginners is the Udemy course "[Scala at Light Speed](https://www.udemy.com/course/fast-scala/)", which is a quick course (~2h) that will give you an overview about the language and its syntax.
 
+Last but not least, [Functional Programming: Simplified](https://www.amazon.com.br/dp/B076J7CJKY/ref=dp-kindle-redirect?_encoding=UTF8&btkr=1) is another excellent book that covers many topics related to functional programming with examples in Scala.
+
 ## References
 
 - [So You Want to be a Functional Programmer](https://cscalfani.medium.com/so-you-want-to-be-a-functional-programmer-part-1-1f15e387e536) (Charles Scalfani)
