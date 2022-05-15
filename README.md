@@ -559,4 +559,5 @@ Another great source of knowledge for beginners is the Udemy course "[Scala at L
 - [Scala Book](https://alvinalexander.com/scala/scala-book-free/) (Alvin Alexander, et al.)
 - [Scala Documentation](https://docs.scala-lang.org/)
 - [Anonymous Functions](https://en.wikipedia.org/wiki/Anonymous_function)
-- [Scala Substitution Model](http://bkpathak.github.io/scala-substitution-model#:~:text=Scala%20model%20of%20expression%20evaluation,does%20not%20need%20further%20evaluation.)
+- [Scala Substitution Model](http://bkpathak.github.io/scala-substitution-model#:~:text=Scala%20model%20of%20expression%20evaluation,does%20not%20need%20further%20evaluation.) (Bijay Pathak)
+- [Scala at Light Speed](https://www.udemy.com/course/fast-scala/) (Rock the JVM)
