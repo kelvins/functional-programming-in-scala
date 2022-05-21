@@ -154,7 +154,11 @@ Even understanding the importance of pure functions, when stopping to think abou
 
 ## Higher-order Functions
 
-In short, higher-order functions are functions that can take other functions as arguments and/or return functions. All other functions are first-order functions. Here is an example of a higher-order function `calculate` that takes a function `func` as argument and uses it to do the calculation:
+In short, higher-order functions are functions that can take other functions as arguments and/or return functions. All other functions are first-order functions. 
+
+Higher-order functions, also known as HOF, can be found in many programming languages and are not specifc to the functional programming paradigm, however they make functional programming much easier as it is possible to combine several functions to accomplish a task.
+
+Here is an example of a higher-order function `calculate` that takes a function `func` as argument and uses it to do the calculation:
 
 ```scala
 scala> def sum(x: Int, y: Int): Int = x + y
