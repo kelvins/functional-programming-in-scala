@@ -16,6 +16,7 @@ If you have any doubts or suggestions about the content, feel free to contribute
 - [Currying](#currying)
 - [Anonymous Functions](#anonymous-functions)
 - [Map, Filter and Reduce](#map-filter-and-reduce)
+- [Recursion](#recursion)
 - [Tail Recursion](#tail-recursion)
 - [Companion Objects](#companion-objects)
 - [Substitution Model](#substitution-model)
@@ -362,6 +363,36 @@ val res0: Int = 24
 - Map, filter and reduce are always applied to every single value of a sequence.
 - Map, filter and reduce are not hard to understand and can make your life much easier.
 - Map, filter and reduce are used everywhere in functional programming.
+
+## Recursion
+
+Recursion is a well known topic in computer science but it is not broadly used in object-oriented programming. On the other hand, in functional programming you can't just write a loop to update a value, which is immutable, but you can use a recursive function to simulate the same behavior.
+
+Scala already provides several built-in functions to perform operations on data structures, for example to sum all values in a sequence:
+
+```scala
+scala> val data: Seq[Int] = Seq(1, 2, 3, 4)
+val data: Seq[Int] = List(1, 2, 3, 4)
+
+scala> data.sum
+val res0: Int = 10
+```
+
+But if you need to do something specific, which doesn't have any built-in function provided, you can write your own recursive function, for example:
+
+```scala
+scala> def sum(data: Seq[Int]): Int = data match {
+     |   case Nil => 0
+     |   case head :: tail => head + sum(tail)
+     | }
+def sum(data: Seq[Int]): Int
+
+scala> val data: Seq[Int] = Seq(1, 2, 3, 4)
+val data: Seq[Int] = List(1, 2, 3, 4)
+
+scala> sum(data)
+val res0: Int = 10
+```
 
 ## Tail Recursion
 
