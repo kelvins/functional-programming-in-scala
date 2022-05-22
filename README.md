@@ -15,7 +15,7 @@ If you have any doubts or suggestions about the content, feel free to contribute
 - [Higher-order Functions](#higher-order-functions)
 - [Currying](#currying)
 - [Anonymous Functions](#anonymous-functions)
-- [Map, Filter and Reduce](#map-filter-and-reduce)
+- [Map-Filter-Reduce](#map-filter-reduce)
 - [Recursion](#recursion)
 - [Tail Recursion](#tail-recursion)
 - [Companion Objects](#companion-objects)
@@ -269,7 +269,7 @@ scala> data.map(_ * 2) // map using anonymous function (concise version)
 val res2: List[Int] = List(2, 4, 6)
 ```
 
-## Map, Filter and Reduce
+## Map-Filter-Reduce
 
 The functions `.map()`, `.filter()` and `.reduce()` are well know functions and are used in many programming languages, but in functional programming they are even more important since it avoids loops and modifying values from the outer scope. It is important to note that these functions always return a new object.
 
